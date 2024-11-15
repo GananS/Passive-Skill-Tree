@@ -62,7 +62,8 @@ public class AttributeEvents {
     if (!(event.getSource() instanceof EntityDamageSource damageSource)) return;
     if (!(damageSource.getEntity() instanceof LivingEntity attacker)) return;
     double evasion = player.getAttributeValue(PSTAttributes.EVASION.get());
-    double evasionChance = Math.min(1.0, evasion * 0.02);
+    double luck = player.getAttributeValue(Attributes.LUCK);
+    double evasionChance = Math.min(0.75, evasion * 0.015) + Math.min(0.25, luck * 0.005);
     if (!(player.getRandom().nextFloat() < evasionChance)) return;
     player.level.playSound(
         null, player, SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 0.5F, 1.5F);
